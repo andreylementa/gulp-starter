@@ -1,0 +1,13 @@
+$base-font-size: 22px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: $base-font-size;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+@import "block/*.scss";
