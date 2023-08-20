@@ -10,6 +10,7 @@ const notify = require("gulp-notify");
 const fileInclude = require("gulp-file-include");
 const htmlmin = require("gulp-htmlmin");
 const size = require("gulp-size");
+const webpHtml = require("gulp-webp-html");
 
 // Обработка HTML
 const html = function () {
@@ -23,6 +24,7 @@ const html = function () {
       })
     )
     .pipe(fileInclude())
+    .pipe(webpHtml())
     .pipe(size({ title: "До сжатия" }))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(size({ title: "После сжатия" }))
