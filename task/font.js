@@ -7,28 +7,26 @@ const app = require("../config/app.js");
 // Плагины
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
-const imagemin = require("gulp-imagemin");
 const newer = require("gulp-newer");
-const webp = require("gulp-webp");
+const fonter = require("gulp-fonter");
+const ttf2woff2 = require("gulp-ttf2woff2");
 
-// Обработка Image
-const img = function () {
-  return src(path.img.src)
+// Обработка Fonts
+const font = function () {
+  return src(path.font.src)
     .pipe(
       plumber({
         errorHandler: notify.onError((error) => ({
-          title: "Image",
+          title: "Fonts",
           message: error.message,
         })),
       })
     )
-    .pipe(newer(path.img.dest))
-    .pipe(webp())
-    .pipe(dest(path.img.dest))
-    .pipe(src(path.img.src))
-    .pipe(newer(path.img.dest))
-    .pipe(imagemin(app.imagemin))
-    .pipe(dest(path.img.dest));
+    .pipe(newer(path.font.dest))
+    .pipe(fonter(app.fonter))
+    .pipe(dest(path.font.dest))
+    .pipe(ttf2woff2())
+    .pipe(dest(path.font.dest));
 };
 
-module.exports = img;
+module.exports = font;
